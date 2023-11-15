@@ -27,7 +27,7 @@ jobs:
       - run:
           name: "Push Docker Image"
           command: |
-            echo "sreehari@123" | docker login -u "demonxslayer47" --password-stdin
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push demonxslayer47/docker_test_sparserecommender:latest
 
 workflows:
