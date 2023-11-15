@@ -97,3 +97,11 @@ def test_to_dense_empty_matrix():
     matrix = SparseMatrix()
     dense_matrix = matrix.to_dense()
     assert dense_matrix == []  
+
+#To test the docker 
+
+def test_set_same_value():
+    matrix = SparseMatrix()
+    matrix.set(0, 0, 5)
+    matrix.set(0, 0, 7)  
+    assert matrix.get(0, 0) == 7  
