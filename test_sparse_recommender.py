@@ -105,3 +105,9 @@ def test_set_same_value():
     matrix.set(0, 0, 5)
     matrix.set(0, 0, 7)  
     assert matrix.get(0, 0) == 7  
+
+def test_add_movie_empty_matrix():
+    matrix1 = SparseMatrix()
+    matrix2 = SparseMatrix()
+    result = matrix1.add_movie(matrix2)
+    assert result.to_dense() == []
