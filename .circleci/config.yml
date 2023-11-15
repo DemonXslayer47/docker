@@ -1,28 +1,36 @@
 version: 2.1
 
 jobs:
-  test:
+  build:
     docker:
-      - image: circleci/python:3.8
-
-    working_directory: ~/repo
-
+      - image: cimg/base:stable
     steps:
       - checkout
-
       - run:
-          name: Install dependencies
+          name: "Run Tests"
           command: |
-            ls  
             pip install -r requirements.txt
+            pytest
+
+      - setup_remote_docker
 
       - run:
-          name: Run tests
+          name: "Build Docker Image"
           command: |
-            pytest
+            docker build -t demonxslayer47/docker_test_sparserecommender:latest .
+
+      - run:
+          name: "Push Docker Image"
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push demonxslayer47/docker_test_sparserecommender:latest
 
 workflows:
   version: 2
-  test_workflow:
+  build-and-deploy:
     jobs:
-      - test
+      - build:
+          filters:
+            branches:
+              only:
+                - main
