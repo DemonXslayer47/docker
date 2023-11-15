@@ -1,2 +1,1 @@
-python-3.8
 pytest==7.5.1
