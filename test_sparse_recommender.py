@@ -99,7 +99,6 @@ def test_to_dense_empty_matrix():
     assert dense_matrix == []  
 
 #To test the docker 
-
 def test_set_same_value():
     matrix = SparseMatrix()
     matrix.set(0, 0, 5)
